@@ -215,7 +215,16 @@ class _HomePageState extends State<HomePage> {
                                 heroTag: 'small${i + 1}',
                                 backgroundColor: colors.shade1,
                                 elevation: 0.0,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    ScaleFadePageTransition(
+                                      child: PlayerPage(
+                                        index: i + 1,
+                                      ),
+                                    ),
+                                  );
+                                },
                                 child: CustomButton(
                                     icon: Icons.play_arrow_rounded,
                                     iconSize: 35,

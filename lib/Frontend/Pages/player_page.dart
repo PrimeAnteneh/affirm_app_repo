@@ -8,7 +8,11 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PlayerPage extends StatefulWidget {
-  const PlayerPage({Key? key}) : super(key: key);
+  final int? index;
+  const PlayerPage({
+    Key? key,
+    this.index,
+  }) : super(key: key);
 
   @override
   State<PlayerPage> createState() => _PlayerPageState();
@@ -140,13 +144,13 @@ class _PlayerPageState extends State<PlayerPage>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      height: 370,
+                      height: width / 1.3,
                       child: AnimatedBuilder(
                         animation: _animation,
                         builder: (context, _) {
                           return Container(
-                            height: 250,
-                            width: 250,
+                            height: 200,
+                            width: 200,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               //color: colors.shade1,
@@ -168,7 +172,7 @@ class _PlayerPageState extends State<PlayerPage>
                               ),
                               border: Border.all(
                                 color: colors.shade1,
-                                width: 10,
+                                width: 7,
                               ),
                             ),
                           );
@@ -176,14 +180,14 @@ class _PlayerPageState extends State<PlayerPage>
                       ),
                     ),
                     Text(
-                      'Recording_1',
+                      'Recording_${widget.index ?? 0}',
                       style: TextStyle(
                         fontSize: 20,
                         color: colors.shadeSide,
                       ),
                     ),
                     Container(
-                      height: 65,
+                      height: 68,
                       margin: const EdgeInsets.symmetric(
                         horizontal: 10,
                       ),
@@ -395,7 +399,7 @@ class _PlayerPageState extends State<PlayerPage>
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 55,
+                        height: width / 6.55,
                         child: ListTile(
                           onTap: !isCollapsed ? closeDrawer : openDrawer,
                           enabled: true,

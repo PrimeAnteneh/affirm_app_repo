@@ -1,3 +1,6 @@
+import 'package:affirm/Frontend/Pages/home_page.dart';
+import 'package:affirm/Frontend/Pages/player_page.dart';
+import 'package:affirm/Frontend/Utilities/custom_page_transition.dart';
 import 'package:affirm/Frontend/shared_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -193,9 +196,8 @@ class _RecordingPageState extends State<RecordingPage>
                       }
                     },
                     child: Container(
-                      height: 95,
-                      width: 59,
-                      padding: const EdgeInsets.only(right: 10.0),
+                      height: 105,
+                      width: 45,
                       decoration: BoxDecoration(
                         color: Colors.white38,
                         borderRadius: const BorderRadius.only(
@@ -207,12 +209,13 @@ class _RecordingPageState extends State<RecordingPage>
                           width: 3,
                         ),
                       ),
-                      child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 2.0),
                         child: Icon(
                           isplaying
                               ? Icons.pause_rounded
                               : Icons.play_arrow_rounded,
-                          size: 45,
+                          size: 40,
                           color:
                               !isplaying ? Colors.amberAccent : colors.shade3,
                         ),
@@ -234,9 +237,8 @@ class _RecordingPageState extends State<RecordingPage>
                       }
                     },
                     child: Container(
-                      height: 95,
-                      width: 50,
-                      padding: const EdgeInsets.only(left: 7.0),
+                      height: 105,
+                      width: 45,
                       decoration: BoxDecoration(
                         color: Colors.white38,
                         borderRadius: const BorderRadius.only(
@@ -248,10 +250,11 @@ class _RecordingPageState extends State<RecordingPage>
                           width: 3,
                         ),
                       ),
-                      child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 2.0),
                         child: Icon(
                           Icons.stop,
-                          size: 45,
+                          size: 40,
                           color: stop ? Colors.red : colors.shade3,
                         ),
                       ),
@@ -260,33 +263,38 @@ class _RecordingPageState extends State<RecordingPage>
                 ],
               ),
             ),
-            InkWell(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(200),
-                topRight: Radius.circular(200),
+            Container(
+              margin: EdgeInsets.only(top: width / 10),
+              height: 45,
+              width: 270,
+              decoration: BoxDecoration(
+                color: Colors.white38,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(70),
+                  topRight: Radius.circular(70),
+                ),
+                border: Border.all(
+                  color: Colors.white70,
+                  width: 3,
+                ),
               ),
-              highlightColor: colors.green,
-              onTap: () {},
-              child: Container(
-                height: 60,
-                width: 270,
-                decoration: BoxDecoration(
-                  color: Colors.white38,
+              child: Center(
+                child: InkWell(
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(200),
                     topRight: Radius.circular(200),
                   ),
-                  border: Border.all(
-                    color: Colors.white70,
-                    width: 3,
-                  ),
-                ),
-                child: Center(
+                  highlightColor: colors.green,
+                  onTap: () {
+                    Navigator.pop(
+                      context,
+                    );
+                  },
                   child: Text(
                     'Save',
                     style: TextStyle(
                       color: colors.shade3,
-                      fontSize: 30,
+                      fontSize: 25,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
