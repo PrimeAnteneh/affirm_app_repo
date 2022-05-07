@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
               shadowColor: colors.shade2,
               borderRadius: BorderRadius.circular(30),
               child: Container(
-                height: 45,
+                //height: 5,
                 decoration: BoxDecoration(
                   color: colors.shadeSide,
                   border: Border.all(
@@ -114,37 +114,40 @@ class _HomePageState extends State<HomePage> {
                   ),
                   //borderRadius: BorderRadius.circular(20),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Play all',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: colors.shade3,
-                        ),
+                child: ListTile(
+                  dense: true,
+                  tileColor: colors.shade1,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      ScaleFadePageTransition(
+                        child: const PlayerPage(),
                       ),
-                      IconButton(
-                        alignment: Alignment.center,
-                        icon: Icon(
-                          Icons.play_arrow_rounded,
-                          size: 30,
-                          color: colors.blue,
+                    );
+                  },
+                  leading: Text(
+                    'Play all',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: colors.shade3,
+                    ),
+                  ),
+                  trailing: IconButton(
+                    alignment: Alignment.center,
+                    icon: Icon(
+                      Icons.play_arrow_rounded,
+                      size: 30,
+                      color: colors.blue,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        ScaleFadePageTransition(
+                          child: const PlayerPage(),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            ScaleFadePageTransition(
-                              child: const PlayerPage(),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
               ),

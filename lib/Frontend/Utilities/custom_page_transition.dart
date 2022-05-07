@@ -5,10 +5,10 @@ class LeftFadePageTransition extends PageRouteBuilder {
   LeftFadePageTransition({required this.child})
       : super(
           transitionDuration: const Duration(
-            milliseconds: 700,
+            milliseconds: 300,
           ),
           reverseTransitionDuration: const Duration(
-            milliseconds: 500,
+            milliseconds: 200,
           ),
           pageBuilder: (context, animation, secondaryAnimation) => child,
         );
@@ -39,10 +39,10 @@ class ScaleFadePageTransition extends PageRouteBuilder {
   ScaleFadePageTransition({required this.child})
       : super(
           transitionDuration: const Duration(
-            milliseconds: 500,
+            milliseconds: 200,
           ),
           reverseTransitionDuration: const Duration(
-            milliseconds: 500,
+            milliseconds: 200,
           ),
           pageBuilder: (context, animation, secondaryAnimation) => child,
         );

@@ -90,6 +90,9 @@ class _PlayerPageState extends State<PlayerPage>
     }
   }
 
+  List list = ['one', 'Two', 'Three', 'Four', 'Five'];
+  bool reordering = false;
+
   @override
   Widget build(BuildContext context) {
     var colors = PrimaryColors();
@@ -376,7 +379,7 @@ class _PlayerPageState extends State<PlayerPage>
                   closeDrawer();
                 }, */
                 child: AnimatedContainer(
-                  height: isCollapsed ? 55 : width * 1.7,
+                  height: isCollapsed ? width / 6.55 : width * 1.7,
                   width: width,
                   decoration: BoxDecoration(
                     color: colors.shade1,
@@ -386,7 +389,7 @@ class _PlayerPageState extends State<PlayerPage>
                     ),
                   ),
                   duration: const Duration(
-                    milliseconds: 500,
+                    milliseconds: 250,
                   ),
                   curve: Curves.easeIn,
                   transform: Matrix4.translationValues(
@@ -398,8 +401,17 @@ class _PlayerPageState extends State<PlayerPage>
                     ),
                   child: Column(
                     children: [
-                      SizedBox(
+                      Container(
                         height: width / 6.55,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color:
+                                  !isCollapsed ? colors.shade3 : colors.shade1,
+                              width: 1,
+                            ),
+                          ),
+                        ),
                         child: ListTile(
                           onTap: !isCollapsed ? closeDrawer : openDrawer,
                           enabled: true,
@@ -413,7 +425,7 @@ class _PlayerPageState extends State<PlayerPage>
                             ),
                           ),
                           title: Text(
-                            'Title.......',
+                            'Title...${list[0]}',
                             style: TextStyle(
                               fontSize: 17,
                               color: colors.shade3,
@@ -429,40 +441,44 @@ class _PlayerPageState extends State<PlayerPage>
                         ),
                       ),
                       Expanded(
-                        child: GestureDetector(
-                          child: ListView.builder(
-                            controller: scController,
-                            itemCount: 20,
-                            itemBuilder: (context, i) {
-                              return ListTile(
-                                onTap: !isCollapsed ? closeDrawer : openDrawer,
-                                enabled: true,
-                                focusColor: colors.shade2,
-                                leading: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.menu,
-                                    size: 25,
-                                    color: colors.shade2,
-                                  ),
+                        child: ReorderableListView.builder(
+                          onReorder: (oldIndex, newIndex) => setState(() {
+                            reordering = true;
+                            var index =
+                                newIndex > oldIndex ? newIndex - 1 : newIndex;
+                            var elem = list.removeAt(oldIndex);
+                            list.insert(index, '$elem');
+                            reordering = false;
+                          }),
+                          itemCount: list.length,
+                          itemBuilder: (context, i) {
+                            return ListTile(
+                              key: ValueKey('$i'),
+                              onTap: !isCollapsed ? closeDrawer : openDrawer,
+                              enabled: true,
+                              focusColor: colors.shade2,
+                              leading: Icon(
+                                Icons.menu,
+                                size: reordering ? 18 : 25,
+                                color:
+                                    reordering ? colors.green : colors.shade2,
+                              ),
+                              title: Text(
+                                'Title...${list[i]}',
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  color: colors.shade3,
                                 ),
-                                title: Text(
-                                  '$i Title.......',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    color: colors.shade3,
-                                  ),
+                              ),
+                              trailing: Text(
+                                '00:30',
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  color: colors.shade3,
                                 ),
-                                trailing: Text(
-                                  '00:30',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    color: colors.shade3,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],
